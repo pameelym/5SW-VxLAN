@@ -1,0 +1,68 @@
+
+PLAY [network] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [spine02]
+ok: [leaf01]
+ok: [spine01]
+ok: [leaf02]
+fatal: [leaf03]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.0.15 port 22: Connection timed out\r\n", "unreachable": true}
+
+TASK [Verify Minimum Software Version] *****************************************
+ok: [leaf01] => {
+    "changed": false, 
+    "failed": false, 
+    "msg": "All assertions passed"
+}
+ok: [leaf02] => {
+    "changed": false, 
+    "failed": false, 
+    "msg": "All assertions passed"
+}
+ok: [spine01] => {
+    "changed": false, 
+    "failed": false, 
+    "msg": "All assertions passed"
+}
+ok: [spine02] => {
+    "changed": false, 
+    "failed": false, 
+    "msg": "All assertions passed"
+}
+
+TASK [Enable frr Zebra] ********************************************************
+ok: [spine02]
+ok: [spine01]
+ok: [leaf02]
+ok: [leaf01]
+
+TASK [Enable frr BGP] **********************************************************
+ok: [leaf01]
+ok: [leaf02]
+ok: [spine01]
+ok: [spine02]
+
+TASK [Enable frr OSPF] *********************************************************
+ok: [leaf01]
+ok: [leaf02]
+ok: [spine01]
+ok: [spine02]
+
+TASK [Copy Interfaces File] ****************************************************
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: 	/home/cumulus/5SW-VxLAN/roles/leaf01/interfaces
+fatal: [leaf01]: FAILED! => {"changed": false, "failed": true, "msg": "Could not find or access 'roles/leaf01/interfaces'\nSearched in:\n\t/home/cumulus/5SW-VxLAN/files/roles/leaf01/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/leaf01/interfaces\n\t/home/cumulus/5SW-VxLAN/files/roles/leaf01/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/leaf01/interfaces"}
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: 	/home/cumulus/5SW-VxLAN/roles/leaf02/interfaces
+fatal: [leaf02]: FAILED! => {"changed": false, "failed": true, "msg": "Could not find or access 'roles/leaf02/interfaces'\nSearched in:\n\t/home/cumulus/5SW-VxLAN/files/roles/leaf02/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/leaf02/interfaces\n\t/home/cumulus/5SW-VxLAN/files/roles/leaf02/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/leaf02/interfaces"}
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: 	/home/cumulus/5SW-VxLAN/roles/spine01/interfaces
+fatal: [spine01]: FAILED! => {"changed": false, "failed": true, "msg": "Could not find or access 'roles/spine01/interfaces'\nSearched in:\n\t/home/cumulus/5SW-VxLAN/files/roles/spine01/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/spine01/interfaces\n\t/home/cumulus/5SW-VxLAN/files/roles/spine01/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/spine01/interfaces"}
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: 	/home/cumulus/5SW-VxLAN/roles/spine02/interfaces
+fatal: [spine02]: FAILED! => {"changed": false, "failed": true, "msg": "Could not find or access 'roles/spine02/interfaces'\nSearched in:\n\t/home/cumulus/5SW-VxLAN/files/roles/spine02/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/spine02/interfaces\n\t/home/cumulus/5SW-VxLAN/files/roles/spine02/interfaces\n\t/home/cumulus/5SW-VxLAN/roles/spine02/interfaces"}
+	to retry, use: --limit @/home/cumulus/5SW-VxLAN/deploy_5-sw-evpn-vxlan.retry
+
+PLAY RECAP *********************************************************************
+leaf01                     : ok=5    changed=0    unreachable=0    failed=1   
+leaf02                     : ok=5    changed=0    unreachable=0    failed=1   
+leaf03                     : ok=0    changed=0    unreachable=1    failed=0   
+spine01                    : ok=5    changed=0    unreachable=0    failed=1   
+spine02                    : ok=5    changed=0    unreachable=0    failed=1   
+
